@@ -1,0 +1,137 @@
+\documentclass[journal,12pt,twocolumn]{IEEEtran}
+
+\usepackage{setspace}
+\usepackage{gensymb}
+\singlespacing
+\usepackage[cmex10]{amsmath}
+
+\usepackage{amsthm}
+
+\usepackage{mathrsfs}
+\usepackage{txfonts}
+\usepackage{stfloats}
+\usepackage{bm}
+\usepackage{cite}
+\usepackage{cases}
+\usepackage{subfig}
+
+\usepackage{longtable}
+\usepackage{multirow}
+
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{steinmetz}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{verbatim}
+\usepackage{tfrupee}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{tkz-euclide}
+
+\usetikzlibrary{calc,math}
+\usepackage{listings}
+    \usepackage{color}                                            %%
+    \usepackage{array}                                            %%
+    \usepackage{longtable}                                        %%
+    \usepackage{calc}                                             %%
+    \usepackage{multirow}                                         %%
+    \usepackage{hhline}                                           %%
+    \usepackage{ifthen}                                           %%
+    \usepackage{lscape}     
+\usepackage{multicol}
+\usepackage{chngcntr}
+
+\DeclareMathOperator*{\Res}{Res}
+
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+\renewcommand\thesectiondis{\arabic{section}}
+\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
+\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}                                 %%
+
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\begin{document}
+\title{Assignment 1}
+\author{Vibhavasu Pasumarti - EP20BTECH11015}
+\maketitle
+\newpage
+\bigskip
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+Download all python codes from 
+\begin{lstlisting}
+https://github.com/VIB2020/AI1103/blob/main/Assignment%201/code/Assignment_1.py
+\end{lstlisting}
+%
+and latex-tikz codes from 
+%
+\begin{lstlisting}
+https://github.com/VIB2020/AI1103/blob/main/Assignment%201/Assignment
+\end{lstlisting}
+\section{Problem}
+A bag contains 2 white and 1 red balls. One ball is 
+drawn at random and then put back in the box after 
+noting it's color. The process is repeated again. 
+If X denotes the number of red balls recorded in the
+two draws, describe X
+\section{Solution}
+
+Possible events:\\
+E1: 2 Red balls are drawn\\
+E2: 1 Red and 1 White ball is drawn\\
+E3: 0 Red / 2 White balls are drawn\\\\
+Let X denote the number of red balls recorded in 
+the two draws\\
+\begin{align}
+P(X = 2) = \frac{1}{3} * \frac{1}{3} = \frac{1}{9}\\\
+P(X = 1) = \left(\frac{1}{3} * \frac{2}{3}\right) * 2 = \frac{4}{9}\\\
+P(X = 0) = \frac{2}{3} * \frac{2}{3} = \frac{4}{9}
+\end{align}
+
+
+\begin{center}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{||c|c|c|c||}
+    \hline
+    _ & _ & _& _\\
+    X    & 0   & 1   & 2   \\[10pt]
+    \hline
+    _ & _ & _& _\\
+    P(X) & {\Large$\frac{4}{9}$} & {\Large$\frac{4}{9}$} &  {\Large$\frac{1}{9}$}\\[10pt]
+    \hline
+    \end{tabular}
+    \caption{Probability distribution table of X}
+    \label{tab:my_label}
+\end{table}
+\end{center}
+Expectation value of X
+\begin{align}
+    \mu = E(X) = \sum x_i P(X = x_i)\\
+     = 0 \left(\frac{4}{9}\right) + 1 \left(\dfrac{4}{9}\right) + 2 \left(\frac{1}{9}\right)\\
+\end{align}
+\begin{center}
+    {\Large $\mu = E(X) = \frac{2}{3}$}
+\end{center}
+Variance of X:
+\begin{align}
+    \sigma(X) = \sum (x_i - \mu)^2P(X = x_i)\\[15pt]
+              =  \left(0 - \frac{2}{3} \right)^2 \left(\frac{1}{9} \right) + \left(1 - \frac{2}{3} \right)^2 \left(\frac{4}{9} \right) + \left(2 - \frac{2}{3} \right)^2 \left(\frac{4}{9} \right)
+\end{align}\\
+\begin{center}
+  {\Large $\sigma(X) = \frac{8}{9}$}
+\end{center}
+
+\end{document}
