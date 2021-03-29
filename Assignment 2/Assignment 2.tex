@@ -1,0 +1,126 @@
+\documentclass[journal,12pt,twocolumn]{IEEEtran}
+
+\usepackage{setspace}
+\usepackage{gensymb}
+\singlespacing
+\usepackage[cmex10]{amsmath}
+
+\usepackage{amsthm}
+
+\usepackage{mathrsfs}
+\usepackage{txfonts}
+\usepackage{stfloats}
+\usepackage{bm}
+\usepackage{cite}
+\usepackage{cases}
+\usepackage{subfig}
+
+\usepackage{longtable}
+\usepackage{multirow}
+
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{steinmetz}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{verbatim}
+\usepackage{tfrupee}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{tkz-euclide}
+
+\usetikzlibrary{calc,math}
+\usepackage{listings}
+    \usepackage{color}                                            %%
+    \usepackage{array}                                            %%
+    \usepackage{longtable}                                        %%
+    \usepackage{calc}                                             %%
+    \usepackage{multirow}                                         %%
+    \usepackage{hhline}                                           %%
+    \usepackage{ifthen}                                           %%
+    \usepackage{lscape}     
+\usepackage{multicol}
+\usepackage{chngcntr}
+
+\DeclareMathOperator*{\Res}{Res}
+
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+\renewcommand\thesectiondis{\arabic{section}}
+\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
+\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}                                 %%
+
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\begin{document}
+\title{Assignment 2}
+\author{Vibhavasu Pasumarti - EP20BTECH11015}
+\maketitle
+\newpage
+\bigskip
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+Download all python codes from 
+\begin{lstlisting}
+https://github.com/VIB2020/AI1103/blob/main/Assignment%201/code/Assignment%202.py
+\end{lstlisting}
+%
+and latex-tikz codes from 
+%
+\begin{lstlisting}
+https://github.com/VIB2020/AI1103/blob/main/Assignment%201/Assignment%202.tex
+\end{lstlisting}
+\section{\Large Problem \large GATE 2009 (CS), Q.21}
+An unbalanced dice (with 6 faces, numbered from 1 to 6) is thrown. The probability that the face value is odd is 90\% of the probability that the face value is even. The probability of getting any even numbered face is the same. If the probability that the face is even given that it is greater than 3 is 0.75, which one of the following options is closest to the probability that the face value exceeds 3?\\[7pt]
+ A: 0.453\\
+ B: 0.468\\
+ C: 0.485\\
+ D: 0.492\\
+\section{\Large Solution}
+Let $X_i$ denote the independent event of number i appearing on 
+the dice\\\
+To find: probability that the face value exceeds 3 i.e P(X > 3)
+Sum of all probabilities = 1\\[5pt]
+\begin{align}
+\implies \space X_1 + X_2 + X_3 + X_4 + X_5 + X_6 = 1 \longrightarrow
+\end{align}
+Given $X_2$, $X_4$, $X_6$ are equally likely\\
+Let $P(X_2) = P(X_4) = P(X_6) = x $
+\begin{align}
+\implies 3x + X_1 + X_3 + X_5 = 1
+\end{align}
+Given probability that the face value is odd is 90\% of the probability that the face value is even
+\begin{align}
+\implies P(X_1 + X_3 + X_5) = 0.9 \times P(X_2 + X_4 + X_6)\\
+ = 0.9 \times (3x) = 2.7x
+ \end{align}
+From Eqn 1: 5.7x = 1
+\begin{align}
+    x = \frac{10}{57}
+\end{align}
+Given the probability that the face is even given that it is greater than 3 is 0.75\\
+Let $E_1$ be the event where the face value X on the die is EVEN.\\
+Let $E_2$ be the event where the face value X on the die is greater then three.
+\begin{align}
+P\left(\frac{E_1}{E_2}\right) = 0.75\\
+P(E_2) = P(X_4) + P(X_5) + P(X_6) = 2x + P(X_5)\\[5pt]
+P \left( \frac{E_1}{E_2} \right) = \frac{P(E_1 \cap E_2)}{P(E_2)}\\[5pt]
+P(E_1 \cap E_2) = P(X_4) + P(X_5) + P(X_6) = 2x\\[5pt]
+\implies \frac{2x}{P(X_5) + 2x} = 0.75 \implies
+P(X_5) = \frac{x}{1.5}\\[3pt]
+\implies P(E_2) = 2x + P(X_5) = 2x + \frac{x}{1.5}\\[5pt]
+= x \times \frac{8}{3} = \frac{10}{57} \times \frac{8}{3} = 0.46755 \approx 0.468
+\end{align}\\
+\centering \large P(\normal Face value \large $>$ 3) = 0.468\\[5pt]
+Option B
+\end{document}
