@@ -1,0 +1,109 @@
+\documentclass[journal,12pt,twocolumn]{IEEEtran}
+
+\usepackage{setspace}
+\usepackage{gensymb}
+\singlespacinzg
+\usepackage[cmex10]{amsmath}
+
+\usepackage{amsthm}
+
+\usepackage{mathrsfs}
+\usepackage{txfonts}
+\usepackage{stfloats}
+\usepackage{bm}
+\usepackage{cite}
+\usepackage{cases}
+\usepackage{subfig}
+
+\usepackage{longtable}
+\usepackage{multirow}
+
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{steinmetz}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{verbatim}
+\usepackage{tfrupee}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{tkz-euclide}
+
+\usetikzlibrary{calc,math}
+\usepackage{listings}
+    \usepackage{color}                                            %%
+    \usepackage{array}                                            %%
+    \usepackage{longtable}                                        %%
+    \usepackage{calc}                                             %%
+    \usepackage{multirow}                                         %%
+    \usepackage{hhline}                                           %%
+    \usepackage{ifthen}                                           %%
+    \usepackage{lscape}     
+\usepackage{multicol}
+\usepackage{chngcntr}
+
+\DeclareMathOperator*{\Res}{Res}
+
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+\renewcommand\thesectiondis{\arabic{section}}
+\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
+\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
+
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+\def\inputGnumericTable{}                                 %%
+
+\lstset{
+%language=C,
+frame=single, 
+breaklines=true,
+columns=fullflexible
+}
+\begin{document}
+\title{Assignment 2}
+\author{Vibhavasu Pasumarti - EP20BTECH11015}
+\maketitle
+\newpage
+\bigskip
+\renewcommand{\thefigure}{\theenumi}
+\renewcommand{\thetable}{\theenumi}
+Download all python codes from 
+\begin{lstlisting}
+https://github.com/VIB2020/AI1103/blob/main/Assignment%202/code/Assignment%202.py
+\end{lstlisting}
+%
+and latex-tikz codes from 
+%
+\begin{lstlisting}
+https://github.com/VIB2020/AI1103/blob/main/Assignment%202/Assignment%202.tex
+\end{lstlisting}
+\section{\Large Problem\\ \large GATE 2015 (EE paper 01 new 2), Q. 27 (Electrical engg. section)}
+
+Two players A, and B alternately keep rolling a fair dice. The person to get a six first wins the game. Given that player A starts the game, the probability that A wins the game is:\\[5pt]
+A: \dfrac{5}{11}\hspace{1cm}
+B: \dfrac{1}{2}\hspace{1cm}
+C: \dfrac{7}{13}\hspace{1cm}
+D: \dfrac{6}{11}
+\section{\Large Solution}
+Let the random variables X denote the win of A\\
+Give that the die is fair\\
+$\implies$The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\[5pt]
+$\implies$The probability of getting 6 = $\dfrac{5}{6}$ = q (say)\\[5pt]
+P(A wins on the first throw) = p\\[5pt]
+\large Constraint:\normalsize A wins the game\\[5pt]
+Thus, if A does not get 6 on the first throw then B also should not get 6 on the second throw.
+P (A wins on the third throw) = $q^2 p$\\
+\imples P (A wins on the $(2n + 1)^t^h $ throw) =\large $q^2^n p$\\[6pt]
+\begin{align}
+P(X) = \sum_{n=1}^{+\infty} q^2^n p \\[5pt]
+= p \sum_{n=1}^{+\infty} (q^2)^n\\[5pt]
+= p \left(\dfrac{1}{1 - q^2}\right) = \dfrac{p}{1 - q^2}
+=\dfrac{\dfrac{1}{6}}{1 - \dfrac{25}{36}} = \dfrac{6}{11}
+\end{align}
+\centering
+\Large P(A wins the game) = P(X) = \dfrac{6}{11}\\[6pt]
+Option D
+\end{document}
