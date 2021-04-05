@@ -2,7 +2,7 @@
 
 \usepackage{setspace}
 \usepackage{gensymb}
-\singlespacinzg
+\onehalfspacing
 \usepackage[cmex10]{amsmath}
 
 \usepackage{amsthm}
@@ -88,20 +88,23 @@ B: \dfrac{1}{2}\hspace{1cm}
 C: \dfrac{7}{13}\hspace{1cm}
 D: \dfrac{6}{11}
 \section{\Large Solution}
-Let the random variables X denote the win of A\\
-Give that the die is fair\\
-$\implies$The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\[5pt]
-$\implies$The probability of getting 6 = $\dfrac{5}{6}$ = q (say)\\[5pt]
-P(A wins on the first throw) = p\\[5pt]
-\large Constraint:\normalsize A wins the game\\[5pt]
-Thus, if A does not get 6 on the first throw then B also should not get 6 on the second throw.
-P (A wins on the third throw) = $q^2 p$\\
-\imples P (A wins on the $(2n + 1)^t^h $ throw) =\large $q^2^n p$\\[6pt]
+\noindent
+\begin{description}
+    \item Let the random variable X denote the win of A.
+    \item Given the die is fair.
+    \item The probability of getting 6 = $\dfrac{1}{6}$ = p (say)
+    \item The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
+    \item P(A wins on the first throw) = p
+    \item \large Constraint:\normalsize A wins the game.
+    \item Thus, if A does not get 6 on the first throw then B also should not get 6 on the second throw.
+    \item P (A wins on the third throw) = $q^2 p$
+    \item \imples P (A wins on the $(2n + 1)^t^h $ throw) =\large $q^2^n p$
+\end{description}
 \begin{align}
-P(X) = \sum_{n=1}^{+\infty} q^2^n p \\[5pt]
-= p \sum_{n=1}^{+\infty} (q^2)^n\\[5pt]
-= p \left(\dfrac{1}{1 - q^2}\right) = \dfrac{p}{1 - q^2}
-=\dfrac{\dfrac{1}{6}}{1 - \dfrac{25}{36}} = \dfrac{6}{11}
+    P(X) = \sum_{n=1}^{+\infty} q^2^n p \\[5pt]
+    = p \sum_{n=1}^{+\infty} (q^2)^n    \\[5pt]
+    = p \left(\dfrac{1}{1 - q^2}\right) = \dfrac{p}{1 - q^2}
+    =\dfrac{\dfrac{1}{6}}{1 - \dfrac{25}{36}} = \dfrac{6}{11}
 \end{align}
 \centering
 \Large P(A wins the game) = P(X) = \dfrac{6}{11}\\[6pt]

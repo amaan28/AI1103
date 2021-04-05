@@ -2,7 +2,7 @@
 
 \usepackage{setspace}
 \usepackage{gensymb}
-\singlespacinzg
+\onehalfspacing
 \usepackage[cmex10]{amsmath}
 
 \usepackage{amsthm}
@@ -82,38 +82,42 @@ https://github.com/VIB2020/AI1103/blob/main/Assignment%202/Assignment%202.tex
 \end{lstlisting}
 \section{\Large Problem \large GATE 2009 (CS), Q.21}
 An unbalanced dice (with 6 faces, numbered from 1 to 6) is thrown. The probability that the face value is odd is 90\% of the probability that the face value is even. The probability of getting any even numbered face is the same. If the probability that the face is even given that it is greater than 3 is 0.75, which one of the following options is closest to the probability that the face value exceeds 3?\\[7pt]
- A: 0.453\\
+ A: 0.453\hspace{3cm}
  B: 0.468\\
- C: 0.485\\
+ C: 0.485\hspace{3cm}
  D: 0.492\\
 \section{\Large Solution}
-Let $X$ denote the independent event of EVEN number appearing on 
-the dice\\
-X can take the values 2, 4, 6 all of which are EQUALLY likely\\
-Let $Y$ denote the independent event of ODD number appearing on 
-the dice\\
-Y can take the values 1, 3, 5\\\
-To find: probability that the face value exceeds 3\\[5pt]
-Sum of all probabilities = 1\\[5pt]
-P(X) + P(Y) = 1\\[5pt]
-Given probability that the face value is odd is 90\% of the\\ probability that the face value is even
+\noindent
+\begin{description}
+\item Let $X$ denote the independent event of EVEN number appearing on the dice.
+\item $X$ can take the values 2, 4, 6 all of which are EQUALLY likely.
+\item Let $Y$ denote the independent event of ODD number appearing on the dice. 
+\item Y can take the values 1, 3, 5
+\item To find: probability that the face value exceeds 3
+\item Sum of all probabilities = 1
+\end{description}
 \begin{align}
-P(Y) = 0.9P(X)\\
-\implies P(X)\times (1 + 0.9) = 1\\
-P(X) = \frac{10}{19} \implies P(Y) = \frac{9}{19}
-\end{align}\\[5pt]
-Given: X = 2, X = 4, X = 6 are EQUALLY likely\\[5pt]
-
-$P(X = 2) = P(X = 4) = P(X = 6) = \dfrac{P(X)}{3} = \dfrac{10}{57}\\$
-\begin{align}
-P\left(\dfrac{X}{(X > 3)\cup (Y > 3)}\right) = 0.75\\[5pt]
-\dfrac{P(X = 4) + P(X = 6)}{P(X = 4) + P(Y = 5) + P(X = 6)} = 0.75\\[5pt]
-P(Y = 5) = \dfrac {P(X = 4) + P(X = 6)}{3}\\[5pt]
-= \frac{1}{3}\times\frac{20}{57} = \frac{20}{171}\\[5pt]
-P((X > 3) \cup\ (Y > 3)) = P(X > 3) + P(Y > 3)\\[4pt]
-= P(X = 4) + P(Y = 5) + P(X = 6)\\
-= \dfrac{10}{57} + \dfrac{10}{57} + \dfrac{20}{171} = \dfrac{80}{171} = 0.46755 \approx 0.468
+    P(X) + P(Y) = 1
 \end{align}
+Given probability that the face value is odd is 90\% of the probability that the face value is even
+\begin{align}
+    P(Y) = 0.9P(X)\\
+    \implies P(X)\times (1 + 0.9) = 1\\
+    P(X) = \frac{10}{19} \implies P(Y) = \frac{9}{19}
+\end{align}
+Given: X = 2, X = 4, X = 6 are EQUALLY likely
+
+\begin{align}
+    P(X = 2) = P(X = 4) = P(X = 6) = \dfrac{P(X)}{3} =     \dfrac{10}{57}\\
+    P\left(\dfrac{X}{(X > 3)\cup (Y > 3)}\right) = 0.75\\
+    \dfrac{P(X = 4) + P(X = 6)}{P(X = 4) + P(Y = 5) + P(X = 6)} =     0.75\\[5pt]
+    P(Y = 5) = \dfrac {P(X = 4) + P(X = 6)}{3}
+    = \frac{1}{3}\times\frac{20}{57} = \frac{20}{171}\\
+    P((X > 3) \cup\ (Y > 3)) = P(X > 3) + P(Y > 3)\\
+    = P(X = 4) + P(Y = 5) + P(X = 6)\\
+    = \dfrac{10}{57} + \dfrac{10}{57} + \dfrac{20}{171} =     \dfrac{80}{171} = 0.46755 \approx 0.468
+\end{align}
+
 \centering
 \Large P(Face value $>$ 3) = 0.468\\[5pt]
 Option B
