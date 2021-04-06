@@ -109,11 +109,11 @@ Given: X = 2, X = 4, X = 6 are EQUALLY likely
 
 \begin{align}
     P(X = 2) = P(X = 4) = P(X = 6) = \dfrac{P(X)}{3} =     \dfrac{10}{57}\\
-    P\left(\dfrac{X}{(X > 3)\cup (Y > 3)}\right) = 0.75\\
+    P\left(\dfrac{X}{(X > 3) + (Y > 3)}\right) = 0.75\\
     \dfrac{P(X = 4) + P(X = 6)}{P(X = 4) + P(Y = 5) + P(X = 6)} =     0.75\\[5pt]
     P(Y = 5) = \dfrac {P(X = 4) + P(X = 6)}{3}
     = \frac{1}{3}\times\frac{20}{57} = \frac{20}{171}\\
-    P((X > 3) \cup\ (Y > 3)) = P(X > 3) + P(Y > 3)\\
+    P((X > 3) + (Y > 3)) = P(X > 3) + P(Y > 3)\\
     = P(X = 4) + P(Y = 5) + P(X = 6)\\
     = \dfrac{10}{57} + \dfrac{10}{57} + \dfrac{20}{171} =     \dfrac{80}{171} = 0.46755 \approx 0.468
 \end{align}
