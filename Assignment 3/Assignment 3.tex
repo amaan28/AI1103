@@ -22,6 +22,7 @@
 \usepackage{mathtools}
 \usepackage{steinmetz}
 \usepackage{tikz}
+\usetikzlibrary{automata, positioning}
 \usepackage{circuitikz}
 \usepackage{verbatim}
 \usepackage{tfrupee}
@@ -88,21 +89,53 @@ B: \dfrac{1}{2}\hspace{1cm}
 C: \dfrac{7}{13}\hspace{1cm}
 D: \dfrac{6}{11}
 \section{\Large Solution}
-\noindent
 \begin{description}
     \item Let the random variable X denote the win of A.
     \item Given the die is fair.
     \item The probability of getting 6 = $\dfrac{1}{6}$ = p (say)
     \item The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
-    \item P(A wins on the first throw) = p
-    \item \large Constraint:\normalsize A wins the game.
-    \item Thus, if A does not get 6 on the first throw then B also should not get 6 on the second throw.
-    \item P (A wins on the third throw) = $q^2 p$
-    \item \imples P (A wins on the $(2n + 1)^t^h $ throw) =\large $q^2^n p$
+    \item \Large
+\end{description}
+
+\begin{center}
+Markov chain for the given problem:
+\newline
+\begin{tikzpicture}[font=\sffamily]
+    \tikzset{node style/.style={state, 
+                                    minimum width=2cm,
+                                    line width=1mm,
+                                    fill=gray!20!white}}
+
+    \node[node style] at (0, 0)     (a)     {A};
+    \node[node style] at (6, 0)     (b)     {B};
+    \node[node style] at (3, -5.196) (w) {Winner};
+        % Connect the states with arrows
+    \draw[every loop,
+          auto=right,
+          line width=1mm,
+          >=latex,
+          draw=orange,
+          fill=orange]
+        
+        (a) edge[bend right=20] node {q = $\dfrac{5}{6}$} (b)
+        (b) edge[bend right=20] node {q = $\dfrac{5}{6}$} (a)
+        (a) edge[bend right=20] node {p = $\dfrac{1}{6}$} (w)
+        (b) edge[bend left=20, auto=left] node {p = $\dfrac{1}{6}$} (w)
+\end{tikzpicture}
+\end{center}
+\\[5pt]
+\begin{description}
+    \item \large  Constraint: A wins the game.
+    \normalsize
+    \item P(A wins on the first throw) = P($X_1$) = $p$
+    \item P(A wins on the third throw) = P($X_3$) = $q^2p$
+    \item P(A wins on the $(2n + 1)^t^h $ throw)= P($X_{2n+1}$) = \large $q^2^n p$
 \end{description}
 \begin{align}
-    P(X) = \sum_{n=1}^{+\infty} q^2^n p \\[5pt]
-    = p \sum_{n=1}^{+\infty} (q^2)^n    \\[5pt]
+\doublespacing
+    P(\text{A wins the game}) = P(X) = \sum_{n=1}^{+\infty} P(X_i) \\
+    P(X) = \sum_{n=1}^{+\infty} q^2^n p \\
+    = p \sum_{n=1}^{+\infty} (q^2)^n    \\
     = p \left(\dfrac{1}{1 - q^2}\right) = \dfrac{p}{1 - q^2}
     =\dfrac{\dfrac{1}{6}}{1 - \dfrac{25}{36}} = \dfrac{6}{11}
 \end{align}
