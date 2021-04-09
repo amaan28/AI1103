@@ -2,7 +2,7 @@
 
 \usepackage{setspace}
 \usepackage{gensymb}
-\onehalfspacing
+\singlespacing
 \usepackage[cmex10]{amsmath}
 
 \usepackage{amsthm}
@@ -42,19 +42,7 @@
 \usepackage{multicol}
 \usepackage{chngcntr}
 
-\DeclareMathOperator*{\Res}{Res}
-
-\renewcommand\thesection{\arabic{section}}
-\renewcommand\thesubsection{\thesection.\arabic{subsection}}
-\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
-
-\renewcommand\thesectiondis{\arabic{section}}
-\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
-\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
-
-
-\hyphenation{op-tical net-works semi-conduc-tor}
-\def\inputGnumericTable{}                                 %%
+                          %%
 
 \lstset{
 %language=C,
@@ -74,20 +62,20 @@ Download all python codes from
 \begin{lstlisting}
 https://github.com/VIB2020/AI1103/blob/main/Assignment%202/code/Assignment%202.py
 \end{lstlisting}
-%
 and latex-tikz codes from 
-%
 \begin{lstlisting}
 https://github.com/VIB2020/AI1103/blob/main/Assignment%202/Assignment%202.tex
 \end{lstlisting}
 \section{\Large Problem \large GATE 2009 (CS), Q.21}
 An unbalanced dice (with 6 faces, numbered from 1 to 6) is thrown. The probability that the face value is odd is 90\% of the probability that the face value is even. The probability of getting any even numbered face is the same. If the probability that the face is even given that it is greater than 3 is 0.75, which one of the following options is closest to the probability that the face value exceeds 3?\\[7pt]
- A: 0.453\hspace{3cm}
- B: 0.468\\
- C: 0.485\hspace{3cm}
- D: 0.492\\
+\begin{enumerate}[label=(\Alph*)]
+    \item  0.453
+    \item  0.468
+    \item  0.485
+    \item  0.492
+\end{enumerate}
 \section{\Large Solution}
-\noindent
+\onehalfspacing
 \begin{description}
 \item Let $X$ denote the independent event of EVEN number appearing on the dice.
 \item $X$ can take the values 2, 4, 6 all of which are EQUALLY likely.
@@ -106,7 +94,6 @@ Given probability that the face value is odd is 90\% of the probability that the
     P(X) = \frac{10}{19} \implies P(Y) = \frac{9}{19}
 \end{align}
 Given: X = 2, X = 4, X = 6 are EQUALLY likely
-
 \begin{align}
     P(X = 2) = P(X = 4) = P(X = 6) = \dfrac{P(X)}{3} =     \dfrac{10}{57}\\
     P\left(\dfrac{X}{(X > 3) + (Y > 3)}\right) = 0.75\\
