@@ -42,7 +42,64 @@
 \usepackage{multicol}
 \usepackage{chngcntr}
 
-                          %%
+\DeclareMathOperator*{\Res}{Res}
+
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
+
+\renewcommand\thesectiondis{\arabic{section}}
+\renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
+\renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
+
+\newcommand{\BEQA}{\begin{eqnarray}}
+\newcommand{\EEQA}{\end{eqnarray}}
+\newcommand{\define}{\stackrel{\triangle}{=}}
+\bibliographystyle{IEEEtran}
+\raggedbottom
+\setlength{\parindent}{0pt}
+\providecommand{\mbf}{\mathbf}
+\providecommand{\pr}[1]{\ensuremath{\Pr\left(#1\right)}}
+\providecommand{\qfunc}[1]{\ensuremath{Q\left(#1\right)}}
+\providecommand{\sbrak}[1]{\ensuremath{{}\left[#1\right]}}
+\providecommand{\lsbrak}[1]{\ensuremath{{}\left[#1\right.}}
+\providecommand{\rsbrak}[1]{\ensuremath{{}\left.#1\right]}}
+\providecommand{\brak}[1]{\ensuremath{\left(#1\right)}}
+\providecommand{\lbrak}[1]{\ensuremath{\left(#1\right.}}
+\providecommand{\rbrak}[1]{\ensuremath{\left.#1\right)}}
+\providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
+\providecommand{\lcbrak}[1]{\ensuremath{\left\{#1\right.}}
+\providecommand{\rcbrak}[1]{\ensuremath{\left.#1\right\}}}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newcommand{\sgn}{\mathop{\mathrm{sgn}}}
+\providecommand{\abs}[1]{\vert#1\vert}
+\providecommand{\res}[1]{\Res\displaylimits_{#1}} 
+\providecommand{\norm}[1]{\lVert#1\rVert}
+%\providecommand{\norm}[1]{\lVert#1\rVert}
+\providecommand{\mtx}[1]{\mathbf{#1}}
+\providecommand{\mean}[1]{E[ #1 ]}
+\providecommand{\fourier}{\overset{\mathcal{F}}{ \rightleftharpoons}}
+%\providecommand{\hilbert}{\overset{\mathcal{H}}{ \rightleftharpoons}}
+\providecommand{\system}{\overset{\mathcal{H}}{ \longleftrightarrow}}
+	%\newcommand{\solution}[2]{\textbf{Solution:}{#1}}
+\newcommand{\solution}{\noindent \textbf{Solution: }}
+\newcommand{\cosec}{\,\text{cosec}\,}
+\providecommand{\dec}[2]{\ensuremath{\overset{#1}{\underset{#2}{\gtrless}}}}
+\newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
+\newcommand{\mydet}[1]{\ensuremath{\begin{vmatrix}#1\end{vmatrix}}}
+\numberwithin{equation}{subsection}
+\makeatletter
+\@addtoreset{figure}{problem}
+\makeatother
+\let\StandardTheFigure\thefigure
+\let\vec\mathbf
+\renewcommand{\thefigure}{\theproblem}
+\def\putbox#1#2#3{\makebox[0in][l]{\makebox[#1][l]{}\raisebox{\baselineskip}[0in][0in]{\raisebox{#2}[0in][0in]{#3}}}}
+     \def\rightbox#1{\makebox[0in][r]{#1}}
+     \def\centbox#1{\makebox[0in]{#1}}
+     \def\topbox#1{\raisebox{-\baselineskip}[0in][0in]{#1}}
+     \def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
 
 \lstset{
 %language=C,
@@ -51,6 +108,7 @@ breaklines=true,
 columns=fullflexible
 }
 \begin{document}
+
 \title{Assignment 2}
 \author{Vibhavasu Pasumarti - EP20BTECH11015}
 \maketitle
@@ -85,27 +143,27 @@ An unbalanced dice (with 6 faces, numbered from 1 to 6) is thrown. The probabili
 \item Sum of all probabilities = 1
 \end{description}
 \begin{align}
-    P(X) + P(Y) = 1
+    \pr{X} + \pr{Y} = 1
 \end{align}
 Given probability that the face value is odd is 90\% of the probability that the face value is even
 \begin{align}
-    P(Y) = 0.9P(X)\\
-    \implies P(X)\times (1 + 0.9) = 1\\
-    P(X) = \frac{10}{19} \implies P(Y) = \frac{9}{19}
+    \pr{Y} = 0.9\pr{X}\\
+    \implies \pr{X}\times (1 + 0.9) = 1\\
+    \pr{X} = \frac{10}{19} \implies \pr{Y} = \frac{9}{19}
 \end{align}
 Given: X = 2, X = 4, X = 6 are EQUALLY likely
 \begin{align}
-    P(X = 2) = P(X = 4) = P(X = 6) = \dfrac{P(X)}{3} =     \dfrac{10}{57}\\
-    P\left(\dfrac{X}{(X > 3) + (Y > 3)}\right) = 0.75\\
-    \dfrac{P(X = 4) + P(X = 6)}{P(X = 4) + P(Y = 5) + P(X = 6)} =     0.75\\[5pt]
-    P(Y = 5) = \dfrac {P(X = 4) + P(X = 6)}{3}
+    \pr{X = 2} = \pr{X = 4} = \pr{X = 6} = \dfrac{\pr{X}}{3} =     \dfrac{10}{57}\\
+    \pr{\dfrac{X}{(X > 3) + (Y > 3)}} = 0.75\\
+    \dfrac{\pr{X = 4} + \pr{X = 6}}{\pr{X = 4} + \pr{Y = 5} + \pr{X = 6}} =     0.75\\[5pt]
+    \pr{Y = 5} = \dfrac {\pr{X = 4} + \pr{X = 6}}{3}
     = \frac{1}{3}\times\frac{20}{57} = \frac{20}{171}\\
-    P((X > 3) + (Y > 3)) = P(X > 3) + P(Y > 3)\\
-    = P(X = 4) + P(Y = 5) + P(X = 6)\\
+    \pr{(X > 3) + (Y > 3)} = \pr{X > 3} + \pr{Y > 3}\\
+    = \pr{X = 4} + \pr{Y = 5} + \pr{X = 6}\\
     = \dfrac{10}{57} + \dfrac{10}{57} + \dfrac{20}{171} =     \dfrac{80}{171} = 0.46755 \approx 0.468
 \end{align}
 
 \centering
-\Large P(Face value $>$ 3) = 0.468\\[5pt]
+\Large $\pr{Face value > 3}$ = 0.468\\[5pt]
 Option B
 \end{document}
