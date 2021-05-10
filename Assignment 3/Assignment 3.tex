@@ -108,8 +108,7 @@ breaklines=true,
 columns=fullflexible
 }
 \begin{document}
-
-\title{Assignment 2}
+\title{Assignment 3}
 \author{Vibhavasu Pasumarti - EP20BTECH11015}
 \maketitle
 \newpage
@@ -118,56 +117,75 @@ columns=fullflexible
 \renewcommand{\thetable}{\theenumi}
 Download all python codes from 
 \begin{lstlisting}
-https://github.com/VIB2020/AI1103/blob/main/Assignment%202/code/Assignment%202.py
+https://github.com/VIB2020/AI1103/blob/main/Assignment%203/code/Assignment%203.py
 \end{lstlisting}
+%
 and latex-tikz codes from 
+%
 \begin{lstlisting}
-https://github.com/VIB2020/AI1103/blob/main/Assignment%202/Assignment%202.tex
+https://github.com/VIB2020/AI1103/blob/main/Assignment%203/Assignment%203.pdf
 \end{lstlisting}
-\section{\Large Problem \large GATE 2009 (CS), Q.21}
-An unbalanced dice (with 6 faces, numbered from 1 to 6) is thrown. The probability that the face value is odd is 90\% of the probability that the face value is even. The probability of getting any even numbered face is the same. If the probability that the face is even given that it is greater than 3 is 0.75, which one of the following options is closest to the probability that the face value exceeds 3?\\[7pt]
+\section{\Large Problem\\ \large GATE 2015 (EE paper 01 new 2), Q. 27 (Electrical Engg. section)}
+
+Two players A, and B alternately keep rolling a fair dice. The person to get a six first wins the game. Given that player A starts the game, the probability that A wins the game is:\\[5pt]
 \begin{enumerate}[label=(\Alph*)]
-    \item  0.453
-    \item  0.468
-    \item  0.485
-    \item  0.492
-\end{enumerate}
-\section{\Large Solution}
 \onehalfspacing
+\Large
+    \item  $\frac{5}{11}$
+    \item  $\frac{1}{2}$
+    \item  $\frac{7}{13}$
+    \item  $\frac{6}{11}$
+\end{enumerate}
+
+\section{\Large Solution}
+\singlespacing
 \begin{description}
-\item Let $X$ denote the independent event of EVEN number appearing on the dice.
-\item $X$ can take the values 2, 4, 6 all of which are EQUALLY likely.
-\item Let $Y$ denote the independent event of ODD number appearing on the dice. 
-\item Y can take the values 1, 3, 5
-\item To find: probability that the face value exceeds 3
-\item Sum of all probabilities = 1
+    \item Let the random variable X denote the win of A.
+    \item Given the die is fair.
+    \item The probability of getting 6 = $\dfrac{1}{6}$ = p (say)
+    \item The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
+\end{description}
+\begin{center}
+Markov chain for the given problem:
+\begin{tikzpicture}[font=\sffamily]
+    \tikzset{node style/.style={state, 
+                                    minimum width=2cm,
+                                    line width=1mm,
+                                    fill=gray!20!white}}
+
+    \node[node style] at (0, 0)     (a)     {A};
+    \node[node style] at (6, 0)     (b)     {B};
+    \node[node style] at (3, -5.196) (w) {Winner};
+        % Connect the states with arrows
+    \draw[every loop,
+          auto=right,
+          line width=1mm,
+          >=latex,
+          draw=orange,
+          fill=orange]
+        
+        (a) edge[bend right=20] node {q = $\dfrac{5}{6}$} (b)
+        (b) edge[bend right=20] node {q = $\dfrac{5}{6}$} (a)
+        (a) edge[bend right=20] node {p = $\dfrac{1}{6}$} (w)
+        (b) edge[bend left=20, auto=left] node {p = $\dfrac{1}{6}$} (w)
+\end{tikzpicture}
+\end{center}
+\\[5pt]
+\begin{description}
+    \item \large  Constraint: A wins the game.
+    \normalsize
+    \item \pr{\text{A wins on the first throw}} = \pr{$X_1$} = $p$
+    \item \pr{\text{A wins on the third throw}} =\pr{$X_3$}= $q^2p$
+    \item \pr{\text{A wins on the $(2n + 1)^t^h $ throw}}= \pr{$X_{2n+1}$} =  $q^2^n p$
 \end{description}
 \begin{align}
-    \pr{X} + \pr{Y} = 1
+    \pr{X} = \sum_{n=1}^{+\infty} \pr{X_i} \\
+    \pr{X} = \sum_{n=1}^{+\infty} q^2^n p \\
+    = p \sum_{n=1}^{+\infty} (q^2)^n    \\
+    = p \left(\dfrac{1}{1 - q^2}\right) = \dfrac{p}{1 - q^2}
+    =\dfrac{\dfrac{1}{6}}{1 - \dfrac{25}{36}} = \dfrac{6}{11}
 \end{align}
-Given probability that the face value is odd is 90\% of the probability that the face value is even
-\begin{align}
-    \pr{Y} = 0.9\pr{X}\\
-    \implies \pr{X}\times (1 + 0.9) = 1\\
-    \pr{X} = \frac{10}{19} \implies \pr{Y} = \frac{9}{19}
-\end{align}
-Given: X = 2, X = 4, X = 6 are EQUALLY likely
-\begin{align}
-    \pr{X = 2} = \pr{X = 4}\\
-    = \pr{X = 6} = \dfrac{\pr{X}}{3} = \dfrac{10}{57}\\
-    \pr{\dfrac{X}{(X > 3) + (Y > 3)}} = 0.75\\
-    \dfrac{\pr{X = 4} + \pr{X = 6}}{\pr{X = 4} + \pr{Y = 5} + \pr{X = 6}}\\
-    = 0.75\\
-    \pr{Y = 5} = \dfrac {\pr{X = 4} + \pr{X = 6}}{3}\\
-    = \frac{1}{3}\times\frac{20}{57} = \frac{20}{171}\\
-    \pr{(X > 3) + (Y > 3)}\\
-    = \pr{X > 3} + \pr{Y > 3}\\
-    = \pr{X = 4} + \pr{Y = 5}\ + \pr{X = 6}\\
-    = \dfrac{10}{57} + \dfrac{10}{57} + \dfrac{20}{171} = \dfrac{80}{171}\\
-    = 0.46755 \approx 0.468
-\end{align}
-
 \centering
-\Large $\pr{\text{Face value} > 3}$ = 0.468\\[5pt]
-Option B
+\Large \pr{\text{A wins the game}} = \pr{X} = \dfrac{6}{11}\\[6pt]
+Option D
 \end{document}
