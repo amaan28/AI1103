@@ -6,7 +6,6 @@
 \usepackage{tikz}
 \usetikzlibrary{automata,positioning}
 \usepackage{amsthm}
-
 \usepackage{mathrsfs}
 \usepackage{txfonts}
 \usepackage{stfloats}
@@ -137,9 +136,9 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     \item Given the die is fair.
     \item The probability of getting 6 = $\dfrac{1}{6}$ = p (say)
     \item The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
+    \item Markov chain for the given problem:
 \end{description}
 \begin{center}
-Markov chain for the given problem:
 \begin{tikzpicture}[font=\sffamily]
 \tikzset{node style/.style={state, 
                                     minimum width=1.4cm,
@@ -147,8 +146,8 @@ Markov chain for the given problem:
                                     fill=gray!20!white}}
 
     \node [node style] at (0, 0)     (a)     {A};
-    \node [node style] at (5, 0)     (b)     {B};
-    \node [node style] at (2.5, -4.3301) (w) {Winner};
+    \node [node style] at (3, 0)     (b)     {B};
+    \node [node style] at (1.5, -2.5981) (w) {Winner};
     \draw[every loop,
           auto=right,
           line width=1mm,
@@ -162,34 +161,31 @@ Markov chain for the given problem:
         (b) edge[bend left=10, auto=left] node {$p = \frac{1}{6}$} (w)
 \end{tikzpicture}
 \end{center}
-Transition/Stochastic matrix:\\
-\begin{math}
+Transition/Stochastic matrix:
+\begin{align*}
     P = \myvec{
     0 & q & p\\
     q & 0 & p\\
     0 & 0 & 0}
-    \implies \lim_{n \to \infty} P^n \xrightarrow{} 0 \small \because p , q < 1\\
-
+    \implies \lim_{n \to \infty} P^n \xrightarrow{} 0 \because p , q < 1\\
     \implies P \text{ is reducible}
-    \implies \lim_{n \to \infty}Pr_{AW}(n) = 0\\
-\end{math}\\
+    \implies \lim_{n \to \infty}Pr_{AW}(n) = 0
+\end{align*}
 P$^n$ represents n rolls of dice\\
 Given: A starts the game\\
 Constraint: A wins the game.\\
 The initial operator representing this constraint:\\
 A$_1$ = \myvec{p & 0 & 0}\\
-First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll\\
-\begin{math}
+First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll
+\begin{align*}
     Pr_{AW}(1) = p\\
     A_2 = A_1 P = \myvec{p & 0 & 0}\myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}  = \myvec{0 & qp & 0}\\
     \implies  Pr_{AW}(2) = 0\\
-    
     A_3 = A_2 P = \myvec{0 & qp & 0} \myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}= \myvec{q^2 p & 0 & 0}\\
     \implies  Pr_{AW}(3) = q^2 p\\
-    
     A_4 = \myvec{0 & q^3 p & 0} \implies  Pr_{AW}(4) = 0\\
-    A_5 = \myvec{q^4 p & 0 & 0} \implies  Pr_{AW}(5) = q^4 p\\
-    \text{By induction}:\\
+    A_5 = \myvec{q^4 p & 0 & 0} \implies  Pr_{AW}(5) = q^4 p
+    \intertext{By induction:}
     A_{2n} = \myvec{0 & q^{2n - 1} p & 0} \implies Pr_{AW}(2n) = 0\\
     A_{2n + 1} = \myvec{q^{2n} & 0 & 0}  \implies Pr_{AW}(2n + 1) = q^{2n} p\\
     \pr{\text{A wins}} = \sum_{n=1}^{\infty} Pr_{AW}(n)\\
@@ -199,7 +195,7 @@ First element of each A$_i$ represents the probability of A to win in i$^{th}$ r
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
     = p \left(\dfrac{1}{1 - q^2}\right)
     =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-\end{math}
+\end{align*}
 \centering
 \Large \pr{\text{A wins the game}} = \dfrac{6}{11}
 \\Option D
