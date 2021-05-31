@@ -131,13 +131,13 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     C $\dfrac{7}{13}$ \hspace{1cm}
     D $\dfrac{6}{11}$ \hspace{1cm}
 \section{\Large Solution}
-\begin{description}
-    \item Let the random variable X denote the win of A.
-    \item Given the die is fair.
-    \item The probability of getting 6 = $\dfrac{1}{6}$ = p (say)
-    \item The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
-    \item Markov chain for the given problem:
-\end{description}
+\begin{definition}
+    Let the random variable X denote the win of A.
+    Given the die is fair.\\
+    The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\
+    The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)\\
+    Markov chain for the given problem:
+\end{definition}
 \begin{center}
 \begin{tikzpicture}[font=\sffamily]
 \tikzset{node style/.style={state, 
@@ -169,17 +169,15 @@ Transition/Stochastic matrix:\\
     0 & 0 & 0}
     \implies $\lim_{n \to \infty}$ P$^n$ \xrightarrow{} 0 \because p , q < 1\\
     \implies P \text{ is reducible}
-    \implies $\lim_{n \to \infty}$$Pr_{AW}(n)$ = 0\\
+    \implies $\lim_{n \to \infty}Pr_{AW}(n)$ = 0\\
     P$^n$ represents n rolls of dice\\
     Given: A starts the game\\
     Constraint: A wins the game.\\
     The initial operator representing this constraint:\\
     A$_1$ = \myvec{p & 0 & 0}\\
     First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll
-    
 \end{definition}
-
-\begin{lemma}
+\begin{align*}
     Pr_{AW}(1) = p\\
     A_2 = A_1 P = \myvec{p & 0 & 0}\myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}  = \myvec{0 & qp & 0}\\
     \implies  Pr_{AW}(2) = 0\\
@@ -197,7 +195,7 @@ Transition/Stochastic matrix:\\
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
     = p \left(\dfrac{1}{1 - q^2}\right)
     =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-\end{lemma}
+\end{align*}
 \centering
 \Large \pr{\text{A wins the game}} = \dfrac{6}{11}
 \\Option D
