@@ -161,23 +161,25 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
         (b) edge[bend left=10, auto=left] node {$p = \frac{1}{6}$} (w)
 \end{tikzpicture}
 \end{center}
-Transition/Stochastic matrix:
-\begin{align*}
+Transition/Stochastic matrix:\\
+\begin{definition}
     P = \myvec{
     0 & q & p\\
     q & 0 & p\\
     0 & 0 & 0}
-    \implies \lim_{n \to \infty} P^n \xrightarrow{} 0 \because p , q < 1\\
+    \implies $\lim_{n \to \infty}$ P$^n$ \xrightarrow{} 0 \because p , q < 1\\
     \implies P \text{ is reducible}
-    \implies \lim_{n \to \infty}Pr_{AW}(n) = 0
-\end{align*}
-P$^n$ represents n rolls of dice\\
-Given: A starts the game\\
-Constraint: A wins the game.\\
-The initial operator representing this constraint:\\
-A$_1$ = \myvec{p & 0 & 0}\\
-First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll
-\begin{align*}
+    \implies $\lim_{n \to \infty}$$Pr_{AW}(n)$ = 0\\
+    P$^n$ represents n rolls of dice\\
+    Given: A starts the game\\
+    Constraint: A wins the game.\\
+    The initial operator representing this constraint:\\
+    A$_1$ = \myvec{p & 0 & 0}\\
+    First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll
+    
+\end{definition}
+
+\begin{lemma}
     Pr_{AW}(1) = p\\
     A_2 = A_1 P = \myvec{p & 0 & 0}\myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}  = \myvec{0 & qp & 0}\\
     \implies  Pr_{AW}(2) = 0\\
@@ -195,7 +197,7 @@ First element of each A$_i$ represents the probability of A to win in i$^{th}$ r
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
     = p \left(\dfrac{1}{1 - q^2}\right)
     =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-\end{align*}
+\end{lemma}
 \centering
 \Large \pr{\text{A wins the game}} = \dfrac{6}{11}
 \\Option D
