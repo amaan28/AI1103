@@ -51,10 +51,17 @@
 \renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
 \renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
 
-\newcommand{\BEQA}{\begin{eqnarray}}
-\newcommand{\EEQA}{\end{eqnarray}}
+
 \newcommand{\define}{\stackrel{\triangle}{=}}
-\newtheorem{definition}{Definition}[theorem]
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+%\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
 \bibliographystyle{IEEEtran}
 \raggedbottom
 \setlength{\parindent}{0pt}
@@ -70,8 +77,7 @@
 \providecommand{\cbrak}[1]{\ensuremath{\left\{#1\right\}}}
 \providecommand{\lcbrak}[1]{\ensuremath{\left\{#1\right.}}
 \providecommand{\rcbrak}[1]{\ensuremath{\left.#1\right\}}}
-\theoremstyle{remark}
-\newtheorem{rem}{Remark}
+
 \newcommand{\sgn}{\mathop{\mathrm{sgn}}}
 \providecommand{\abs}[1]{\vert#1\vert}
 \providecommand{\res}[1]{\Res\displaylimits_{#1}} 
@@ -132,93 +138,102 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     C $\dfrac{7}{13}$ \hspace{1cm}
     D $\dfrac{6}{11}$ \hspace{1cm}
 \section{\Large Solution}
-
-\begin{definition}
-    Let the random variable X denote the win of A.
-    Given the die is fair.\\
+\begin{itemize}
+    \item Given the die is fair.
+    \item So, for any given throw by A or B:\\
     The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\
-    The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)\\
-    Markov chain for the given problem:
-    \begin{center}
+    The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
+\end{itemize}
+\begin{center}
+    Markov chain for the given problem:\\
     \begin{tikzpicture}[font=\sffamily]
-    \tikzset{node style/.style={state, 
-                                        minimum width=1.4cm,
-                                        line width=0.5mm,
-                                        fill=gray!20!white}}
+    \tikzset{node style/.style={state, minimum width = 1.5cm,
+                            line width=0.5mm, fill=gray!20!white}}
     
         \node [node style] at (0, 0)     (a)     {A};
-        \node [node style] at (3, 0)     (b)     {B};
-        \node [node style] at (1.5, -2.5981) (w) {Winner};
-        \draw[every loop,
-            auto=right,
-            line width=1mm,
-            >=latex,
-            draw=orange,
-            fill=orange]
+        \node [node style] at (5, 0)     (b)     {B};
+        \node [node style] at (2.5, -4.3301) (w) {Winner};
+        \draw[every loop, auto=right, line width=1mm,
+                >=latex, draw=orange,fill=orange]
             
-            (a) edge[bend right=20] node {$q = \frac{5}{6}$} (b)
-            (b) edge[bend right=20] node {$q = \frac{5}{6}$} (a)
-            (a) edge[bend right=10] node {$p = \frac{1}{6}$} (w)
-            (b) edge[bend left=10, auto=left] node {$p =     \frac{1}{6}$} (w)
+            (a) edge[bend right=20] node {$q = \dfrac{5}{6}$} (b)
+            (b) edge[bend right=20] node {$q = \dfrac{5}{6}$} (a)
+            (a) edge[bend right=20] node {$p = \dfrac{1}{6}$} (w)
+            (b) edge[bend left=20, auto=left] node {$p =     \dfrac{1}{6}$} (w)
     \end{tikzpicture}
-    \end{center}
-    
-\onehalfspacing
-Transition/Stochastic matrix:\\
-    P = \myvec{
-    0 & q & p\\
-    q & 0 & p\\
-    0 & 0 & 0}
-    \implies $\lim_{n \to \infty}$ P$^n$ \xrightarrow{} 0 \because p , q < 1\\
-    \implies P \text{ is reducible}
-    \implies $\lim_{n \to \infty}Pr_{AW}(n)$ = 0\\
+\end{center}
+\begin{definition}
+    Transition/Stochastic matrix for the above Markov chain:\\
+    \begin{align*} \large
+        P = \myvec{ 0 & q & p\\
+                    q & 0 & p\\
+                    0 & 0 & 0}
+    \end{align*}
+\end{definition}
+
+\begin{lemma} \large
+    \begin{align*}
+        \lim_{n \to \infty}Pr_{AW}(n) = 0
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    \begin{align*}
+        p , q < 1
+        \implies \lim_{n \to \infty} P^n \xrightarrow{} 0\\
+        \implies P \text{ is reducible}\\
+        \therefore \lim_{n \to \infty}Pr_{AW}(n) = 0
+    \end{align*}
+\end{proof}
+\begin{definition}
     P$^n$ represents n rolls of dice\\
     Given: A starts the game\\
     Constraint: A wins the game.\\
     The initial operator representing this constraint:\\
-    A$_1$ = \myvec{p & 0 & 0}\\
-    First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll\\
-    Pr_{AW}(1) = p\\
+    
+    A$_1 = \myvec{p & 0 & 0}$
+\end{definition}
+\begin{remark}
+    First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll
+\end{remark}
+
+\begin{align*}
+    \implies Pr_{AW}(1) = p\\
     A_2 = A_1 P = \myvec{p & 0 & 0}\myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}  = \myvec{0 & qp & 0}\\
     \implies  Pr_{AW}(2) = 0\\
     A_3 = A_2 P = \myvec{0 & qp & 0} \myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}= \myvec{q^2 p & 0 & 0}\\
     \implies  Pr_{AW}(3) = q^2 p
-\end{definition}
-\begin{table}[h!]
-    \begin{tabular}{|c|c|c|}
-        \hline
-        A&No.of Turns & Probability \\ [0.5ex]
-        \hline\hline
-            Pr_{AW}(1) & 1 & p = 1/6\\
-            \hline
-            Pr_{AW}(3) & 2 & 0\\
-            \hline
-            Pr_{AW}(3) & 3 & q^2p\\
-            \hline
-            .&.&.\\
-            .&.&.\\
-            .&..&\\
-            Pr_{AW}(2n) & 2n & 0\\
-            \hline
-            Pr_{AW}(2n+1) & 2n + 1 & q^{2n}p\\
-            \hline
-    \end{tabular}
-    \caption{Summary of Probabilities}
-    \label{Table:1}
-\end{table}
-\begin{definition}
+\end{align*}
+
+\centering \begin{tabular}{|c|c|c|}
+    \hline\
+    A&No.of Turns & Probability \\
+    \hline
+    Pr$_{AW}$(1) & 1 & p = 1/6\\
+    \hline
+    Pr$_{AW}$(2) & 2 & 0\\
+    \hline
+    Pr$_{AW}$(3) & 3 & q$^{2p}$\\
+    \hline
+    .&.&.\\
+    .&.&.\\
+    Pr$_{AW}$(2n) & 2n & 0\\
+    \hline
+    Pr$_{AW}$(2n+1) & 2n + 1 & q$^{2n}$p\\
+    \hline
+    \multicolumn{3}{c}{Table:1 Summary of Probabilities}\\
+\end{tabular}
+
+\begin{align*}
+\onehalfspacing
     \pr{\text{A wins}} = \sum_{n=1}^{\infty} Pr_{AW}(n)\\
     = Pr_{AW}(1) + Pr_{AW}(2) + Pr_{AW}(3) + ....\\
     = p + 0 + q^2p + 0 + q^4p + ....\\
-    
-    = \sum_{k=1}^{\infty} q^2^k p
+    = \sum_{k=1}^{\infty} (q^2)^k p
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
-    
     = p \left(\dfrac{1}{1 - q^2}\right)
     =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-\end{definition}
-
-\centering
-\Large \pr{\text{A wins the game}} = \dfrac{6}{11}
-\\Option D
+\end{align*}
+\centering \Large
+\pr{\text{A wins the game}} = $\dfrac{6}{11}$\\
+Option D is correct
 \end{document}
