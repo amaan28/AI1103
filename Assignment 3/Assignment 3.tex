@@ -182,26 +182,46 @@ Transition/Stochastic matrix:\\
     \implies  Pr_{AW}(2) = 0\\
     A_3 = A_2 P = \myvec{0 & qp & 0} \myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}= \myvec{q^2 p & 0 & 0}\\
     \implies  Pr_{AW}(3) = q^2 p\\
-    A_4 = \myvec{0 & q^3 p & 0} \implies  Pr_{AW}(4) = 0\\
-    A_5 = \myvec{q^4 p & 0 & 0} \implies  Pr_{AW}(5) = q^4 p
-    
-    By induction:
-    
-    A_{2n} = \myvec{0 & q^{2n - 1} p & 0} \implies Pr_{AW}(2n) = 0\\
-    A_{2n + 1} = \myvec{q^{2n} & 0 & 0}  \implies Pr_{AW}(2n + 1) = q^{2n} p
-    
+    %A_4 = \myvec{0 & q^3 p & 0} \implies  Pr_{AW}(4) = 0\\
+    %A_5 = \myvec{q^4 p & 0 & 0} \implies  Pr_{AW}(5) = q^4 p\\
+    %A_{2n} = \myvec{0 & q^{2n - 1} p & 0} \implies Pr_{AW}(2n) = 0\\
+    %A_{2n + 1} = \myvec{q^{2n} & 0 & 0}  \implies Pr_{AW}(2n + 1) = q^{2n} p
+\end{definition}
+\begin{table}[h!]
+    \begin{tabular}{|c|c|c|}
+        \hline
+        A&No.of Turns & Probability \\ [0.5ex]
+        \hline\hline
+            Pr_{AW}(1) & 1 & p = 1/6\\
+            \hline
+            Pr_{AW}(3) & 2 & 0\\
+            \hline
+            Pr_{AW}(3) & 3 & q^2p\\
+            \hline
+            .&.&.\\
+            .&.&.\\
+            .&..&\\
+            Pr_{AW}(2n) & 2n & 0\\
+            \hline
+            Pr_{AW}(2n+1) & 2n + 1 & q^{2n}p\\
+            \hline
+    \end{tabular}
+    \caption{Summary of Probabilities}
+    \label{Table:1}
+\end{table}
+\begin{definition}
     \pr{\text{A wins}} = \sum_{n=1}^{\infty} Pr_{AW}(n)\\
     = Pr_{AW}(1) + Pr_{AW}(2) + Pr_{AW}(3) + ....\\
     = p + 0 + q^2p + 0 + q^4p + ....\\
+    
     = \sum_{k=1}^{\infty} q^2^k p
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
     
     = p \left(\dfrac{1}{1 - q^2}\right)
     =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-
 \end{definition}
+
 \centering
 \Large \pr{\text{A wins the game}} = \dfrac{6}{11}
 \\Option D
-
 \end{document}
