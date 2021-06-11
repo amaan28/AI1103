@@ -6,6 +6,8 @@
 \usepackage{tikz}
 \usetikzlibrary{automata,positioning}
 \usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{blkarray}
 \usepackage{mathrsfs}
 \usepackage{txfonts}
 \usepackage{stfloats}
@@ -59,7 +61,6 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
-%\theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
 \bibliographystyle{IEEEtran}
@@ -163,83 +164,66 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     \end{tikzpicture}
 \end{center}
 \begin{definition}
-    Transition/Stochastic matrix for the above Markov chain:\\
-    \begin{align*} \large
-        P = \myvec{ 0 & q & p\\
-                    q & 0 & p\\
-                    0 & 0 & 0}
+    %Each throw of the fair dice by A and B is independent of theie past throws.\\$\therefore$
+    Transition/Stochastic matrix corresponding to each throw of dice:
+    \begin{align*}
+        X = \begin{blockarray}{ *{4}{c} }
+                & A & B & Winner \\
+                \begin{block}{ c @{\quad} [ @{\,} *{3}{c} @{\,} ] }
+                    A & 0 & q & p  \\
+                    B & q & 0 & p\\
+                Winner & 0 & 0 & 0  \\
+                \end{block}
+            \end{blockarray}\\
+            \implies p_{AW}(i) = (X^i)_{13}
     \end{align*}
 \end{definition}
-
 \begin{lemma} \large
     \begin{align*}
         \lim_{n \to \infty}p_{AW}(n) = 0
     \end{align*}
 \end{lemma}
 \begin{proof}
-    \begin{align*}
-        p , q < 1
-        \implies \lim_{n \to \infty} P^n \xrightarrow{} 0\\
-        \implies P \text{ is reducible}\\
-        \therefore \lim_{n \to \infty}p_{AW}(n) = 0
+   \begin{align*}
+      p , q < 1
+      \implies \text{X is reducible.}\\
+     \implies \lim_{n \to \infty} (X)^n \to 0\label{Eqn:2.1}\\
+         \lim_{n \to \infty}{(X)^n}_{13} = 0
+         \therefore \lim_{n \to \infty} p_{AW}(n) = 0
     \end{align*}
 \end{proof}
-\begin{definition}
-    Operator $A_i$ corresponds to the state of the game on the $i_{th}$ roll of dice.\\
-    $P^n$ is the corresponding Transition matrix for n rolls of dice\\
-\end{definition}
-
-\begin{lemma}
-    The operator corresponding to the initial state i.e the first throw of dice is:
-    \begin{align*}
-        A_1 = \myvec{p & 0 & 0}
-    \end{align*}
-\end{lemma}
-\begin{proof}
-    Given: A starts the game.\\
-    Constraint: A wins the game.\\
-    $\implies$ \pr{\text{B winning on first throw}} = $p_{BW}(1)$ = 0\\
-    \pr{\text{A winning on first throw}} = $p_{AW}(1)$ = p\\
-    $\therefore$ Operator corresponding this state is:
-    \begin{align*}
-        A_1 = \myvec{p & 0 & 0}
-    \end{align*}
-\end{proof}
-\begin{remark}
-    First element of each A$_i$ represents the probability of A to win in i$^{th}$ roll
-\end{remark}
-
 \begin{align*}
-    \implies p_{AW}(1) = p\\
-    A_2 = A_1 P = \myvec{p & 0 & 0}\myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}  = \myvec{0 & qp & 0}\\
-    \implies  p_{AW}(2) = 0\\
-    A_3 = A_2 P = \myvec{0 & qp & 0} \myvec{0 & q & 0\\ q & 0 & 0\\ p & p & 0}= \myvec{q^2 p & 0 & 0}\\
-    \implies  p_{AW}(3) = q^2 p
+    \intertext{Given: A throws first.}
+    \implies p_{AW}(1) = X_{13} = p\\ 
+    \intertext{Second throw: (by B)}
+    X^2 = \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0} \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0}\\
+    = \myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}
+    \implies  (X^2)_{13} = 0\\
+    X^3 = \myvec{ 0 & q & p\\0 & 0 & 0\\0 & 0 & 0}\myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}\\
+    =\myvec{ 0 & q^3 & q^2p\\0 & 0 & 0\\0 & 0 & 0}
+    \implies  (X^3)_{13} = q^2 p\\
 \end{align*}
-
 \centering \begin{tabular}{|c|c|c|}
     \hline\
-    A&No.of Turns & Probability \\
+    X&No.of Turns & Probability \\
     \hline
-    p$_{AW}$(1) & 1 & p = 1/6\\
+    $(X^1)_{13}$ & 1 & p = 1/6\\
     \hline
-    p$_{AW}$(2) & 2 & 0\\
+    $(X^2)_{13}$ & 2 & 0\\
     \hline
-    p$_{AW}$(3) & 3 & q$^{2p}$\\
+    $(X^3)_{13}$ & 3 & q$^2$p\\
     \hline
-    .&.&.\\
-    .&.&.\\
-    p$_{AW}$(2n) & 2n & 0\\
+    \vdots & \vdots & \vdots\\
+    $(X^{2n})_{13}$ & 2n & 0\\
     \hline
-    p$_{AW}$(2n+1) & 2n + 1 & q$^{2n}$p\\
+    $(X^{2n + 1})_{13}$ & 2n + 1 & q$^{2n}$p\\
     \hline
     \multicolumn{3}{c}{Table:1 Summary of Probabilities}\\
 \end{tabular}
-
-\begin{align*}
 \onehalfspacing
-    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{AW}(n)\\
-    = p_{AW}(1) + p_{AW}(2) + p_{AW}(3) + ....\\
+\begin{align*}
+    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{AW}(n)
+     = \sum_{n=1}^{\infty} (X^n){13}\\
     = p + 0 + q^2p + 0 + q^4p + ....\\
     = \sum_{k=1}^{\infty} (q^2)^k p
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
