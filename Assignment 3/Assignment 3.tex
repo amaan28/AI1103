@@ -203,27 +203,27 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     =\myvec{ 0 & q^3 & q^2p\\0 & 0 & 0\\0 & 0 & 0}
     \implies  (X^3)_{13} = q^2 p\\
 \end{align*}
-\centering \begin{tabular}{|c|c|c|}
+\centering \begin{tabular}{|c|c|c|c|}
     \hline\
-    X&No.of Turns & Probability \\
+    p_{AW}(i) & X&No.of Turns & Probability \\
     \hline
-    $(X^1)_{13}$ & 1 & p = 1/6\\
+    p_{AW}(1) & $(X^1)_{13}$ & 1 & p = 1/6\\
     \hline
-    $(X^2)_{13}$ & 2 & 0\\
+    p_{AW}(2) & $(X^2)_{13}$ & 2 & 0\\
     \hline
-    $(X^3)_{13}$ & 3 & q$^2$p\\
+    p_{AW}(3) & $(X^3)_{13}$ & 3 & q$^2$p\\
     \hline
-    \vdots & \vdots & \vdots\\
-    $(X^{2n})_{13}$ & 2n & 0\\
+    \vdots & \vdots & \vdots & \vdots\\
+    p_{AW}(2n) & $(X^{2n})_{13}$ & 2n & 0\\
     \hline
-    $(X^{2n + 1})_{13}$ & 2n + 1 & q$^{2n}$p\\
+    p_{AW}(2n + 1) & $(X^{2n + 1})_{13}$ & 2n + 1 & q$^{2n}$p\\
     \hline
     \multicolumn{3}{c}{Table:1 Summary of Probabilities}\\
 \end{tabular}
 \onehalfspacing
 \begin{align*}
     \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{AW}(n)
-     = \sum_{n=1}^{\infty} (X^n){13}\\
+     = \sum_{n=1}^{\infty} (X^n)_{13}\\
     = p + 0 + q^2p + 0 + q^4p + ....\\
     = \sum_{k=1}^{\infty} (q^2)^k p
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
