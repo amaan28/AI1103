@@ -175,12 +175,12 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
                 Winner & 0 & 0 & 0  \\
                 \end{block}
             \end{blockarray}\\
-            \implies p_{AW}(i) = (X^i)_{13}
+            \implies p_{AW}(i) = p_{13}(i) = (X^i)_{13} 
     \end{align*}
 \end{definition}
 \begin{lemma} \large
     \begin{align*}
-        \lim_{n \to \infty}p_{AW}(n) = 0
+        \lim_{n \to \infty}p_{13}(n) = 0
     \end{align*}
 \end{lemma}
 \begin{proof}
@@ -189,41 +189,41 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
       \implies \text{X is reducible.}\\
      \implies \lim_{n \to \infty} (X)^n \to 0\label{Eqn:2.1}\\
          \lim_{n \to \infty}{(X)^n}_{13} = 0
-         \therefore \lim_{n \to \infty} p_{AW}(n) = 0
+         \therefore \lim_{n \to \infty} p_{13}(n) = 0
     \end{align*}
 \end{proof}
 \begin{align*}
     \intertext{Given: A throws first.}
-    \implies p_{AW}(1) = X_{13} = p\\ 
+    \implies p_{13}(1) = X_{13} = p\\ 
     \intertext{Second throw: (by B)}
     X^2 = \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0} \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0}\\
     = \myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}
-    \implies  (X^2)_{13} = 0\\
+    \implies  p_{13}(2) = 0\\
     X^3 = \myvec{ 0 & q & p\\0 & 0 & 0\\0 & 0 & 0}\myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}\\
     =\myvec{ 0 & q^3 & q^2p\\0 & 0 & 0\\0 & 0 & 0}
-    \implies  (X^3)_{13} = q^2 p\\
+    \implies  p_{13}(3) = q^2 p
 \end{align*}
-\centering \begin{tabular}{|c|c|c|c|}
+\centering \begin{tabular}{|c|c|}
     \hline\
-    p_{AW}(i) & X&No.of Turns & Probability \\
+    $p_{13}(i)$ & Probability \\
     \hline
-    p_{AW}(1) & $(X^1)_{13}$ & 1 & p = 1/6\\
+    $p_{13}(1)$ & $p$ = 1/6\\
     \hline
-    p_{AW}(2) & $(X^2)_{13}$ & 2 & 0\\
+    $p_{13}(2)$ & 0\\
     \hline
-    p_{AW}(3) & $(X^3)_{13}$ & 3 & q$^2$p\\
+    $p_{13}(3)$ & $q^2p$\\
     \hline
-    \vdots & \vdots & \vdots & \vdots\\
-    p_{AW}(2n) & $(X^{2n})_{13}$ & 2n & 0\\
+    \vdots & \vdots\\
+    $p_{13}(2n)$ & 0\\
     \hline
-    p_{AW}(2n + 1) & $(X^{2n + 1})_{13}$ & 2n + 1 & q$^{2n}$p\\
+    $p_{13}(2n + 1)$ & $q^{2n}p$\\
     \hline
-    \multicolumn{3}{c}{Table:1 Summary of Probabilities}\\
+    \multicolumn{2}{c}{Table:1 Summary of Probabilities}\\
 \end{tabular}
 \onehalfspacing
 \begin{align*}
-    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{AW}(n)
-     = \sum_{n=1}^{\infty} (X^n)_{13}\\
+    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{13}(n)
+     %= \sum_{n=1}^{\infty} (X^n)_{13}\\
     = p + 0 + q^2p + 0 + q^4p + ....\\
     = \sum_{k=1}^{\infty} (q^2)^k p
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
