@@ -109,7 +109,6 @@
      \def\midbox#1{\raisebox{-0.5\baselineskip}[0in][0in]{#1}}
 
 \lstset{
-%language=C,
 frame=single, 
 breaklines=true,
 columns=fullflexible
@@ -126,9 +125,7 @@ Download all python codes from
 \begin{lstlisting}
 https://github.com/VIB2020/AI1103/blob/main/Assignment%203/code/Assignment%203.py
 \end{lstlisting}
-%
 and latex-tikz codes from 
-%
 \begin{lstlisting}
 https://github.com/VIB2020/AI1103/blob/main/Assignment%203/Assignment%203.pdf
 \end{lstlisting}
@@ -145,64 +142,81 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\
     The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
 \end{itemize}
-\begin{center}
-    Markov chain for the given problem:\\
-    \begin{tikzpicture}[font=\sffamily]
-    \tikzset{node style/.style={state, minimum width = 1.5cm,
-                            line width=0.5mm, fill=gray!20!white}}
-    
-        \node [node style] at (0, 0)     (a)     {A};
-        \node [node style] at (5, 0)     (b)     {B};
-        \node [node style] at (2.5, -4.3301) (w) {Winner};
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[roundnode/.style={circle, draw=black!90, fill=black!7, very thick, minimum size=1.2cm}]
+        \node [roundnode] at (0, 0)     (a)     {1};
+        \node [roundnode] at (5, 0)     (b)     {2};
+        \node [roundnode] at (2.5, -4.3301) (w) {3};
         \draw[every loop, auto=right, line width=1mm,
                 >=latex, draw=orange,fill=orange]
-            
             (a) edge[bend right=20] node {$q = \dfrac{5}{6}$} (b)
             (b) edge[bend right=20] node {$q = \dfrac{5}{6}$} (a)
             (a) edge[bend right=20] node {$p = \dfrac{1}{6}$} (w)
             (b) edge[bend left=20, auto=left] node {$p =     \dfrac{1}{6}$} (w);
     \end{tikzpicture}
+        \caption{Markov chain for the given problem}
+        \label{fig:my_label}
+\end{figure}
+    
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        State & Corresponding description \\
+        \hline
+        \multirow{ 2}{*}{1} & Player who plays first.\\
+        & Here: PLAYER A\\
+        \hline
+        \multirow{ 2}{*}{2} & Player who plays second.\\
+        & Here: PLAYER B\\
+        \hline
+        3 & WINNER\\
+        \hline
+        \multicolumn{2}{c}{Table 1: State description table}
+    \end{tabular}
 \end{center}
 \begin{definition}
-    %Each throw of the fair dice by A and B is independent of theie past throws.\\$\therefore$
-    Transition/Stochastic matrix corresponding to each throw of dice:
-    \begin{align*}
-        X = \begin{blockarray}{ *{4}{c} }
-                & A & B & Winner \\
+    Transition/Stochastic matrix corresponding to single throw of dice: X\\
+    \centering
+         \text{\small (From)} \begin{blockarray}{ *{4}{c} }
+                \multicolumn{3}{c}{(\small To)}\\
+                & 1 & 2 & 3 \\
                 \begin{block}{ c @{\quad} [ @{\,} *{3}{c} @{\,} ] }
-                    A & 0 & q & p  \\
-                    B & q & 0 & p\\
-                Winner & 0 & 0 & 0  \\
+                    1 & 0 & q & p\\ 
+                    2 & q & 0 & p\\
+                    3 & 0 & 0 & 0\\
                 \end{block}
-            \end{blockarray}\\
-            \implies p_{AW}(i) = p_{13}(i) = (X^i)_{13} 
-    \end{align*}
+           \end{blockarray} = X\\
+           $X^n$ corresponds to n throws of dice
+    \begin{align}
+            \pr{\text{A wins in 'i' throws}} = p_{13}(i) = (X^i)_{13} 
+    \end{align}
 \end{definition}
 \begin{lemma} \large
-    \begin{align*}
+    \begin{align}
         \lim_{n \to \infty}p_{13}(n) = 0
-    \end{align*}
+    \end{align}
 \end{lemma}
 \begin{proof}
-   \begin{align*}
-      p , q < 1
-      \implies \text{X is reducible.}\\
-     \implies \lim_{n \to \infty} (X)^n \to 0\label{Eqn:2.1}\\
-         \lim_{n \to \infty}{(X)^n}_{13} = 0
-         \therefore \lim_{n \to \infty} p_{13}(n) = 0
-    \end{align*}
+   \begin{align}
+        p , q < 1
+        \implies \text{X is reducible.}\\
+        \implies \lim_{n \to \infty} (X)^n \to 0\label{Eqn:2.1}\\
+        \lim_{n \to \infty}{(X)^n}_{13} = 0
+        \therefore \lim_{n \to \infty} p_{13}(n) = 0
+    \end{align}
 \end{proof}
-\begin{align*}
+\begin{align}
     \intertext{Given: A throws first.}
-    \implies p_{13}(1) = X_{13} = p\\ 
-    \intertext{Second throw: (by B)}
+    \implies p_{13}(1) = X_{13} = p 
+    \intertext{After second throw: (by B)}
     X^2 = \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0} \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0}\\
     = \myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}
     \implies  p_{13}(2) = 0\\
     X^3 = \myvec{ 0 & q & p\\0 & 0 & 0\\0 & 0 & 0}\myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}\\
     =\myvec{ 0 & q^3 & q^2p\\0 & 0 & 0\\0 & 0 & 0}
     \implies  p_{13}(3) = q^2 p
-\end{align*}
+\end{align}
 \centering \begin{tabular}{|c|c|}
     \hline\
     $p_{13}(i)$ & Probability \\
@@ -218,18 +232,17 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     \hline
     $p_{13}(2n + 1)$ & $q^{2n}p$\\
     \hline
-    \multicolumn{2}{c}{Table:1 Summary of Probabilities}\\
+    \multicolumn{2}{c}{Table 2: Summary of Probabilities}\\
 \end{tabular}
 \onehalfspacing
-\begin{align*}
-    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{13}(n)
-     %= \sum_{n=1}^{\infty} (X^n)_{13}\\
+\begin{align}
+    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{13}(n)\\
     = p + 0 + q^2p + 0 + q^4p + ....\\
     = \sum_{k=1}^{\infty} (q^2)^k p
     = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
     = p \left(\dfrac{1}{1 - q^2}\right)
     =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-\end{align*}
+\end{align}
 \centering \Large
 \pr{\text{A wins the game}} = $\dfrac{6}{11}$\\
 Option D is correct
