@@ -197,13 +197,9 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
                     3 & 0 & 0 & 1\\
                 \end{block}
            \end{blockarray} = X\\
-           $X^n$ corresponds to n throws of dice
-    \begin{align}
-            \pr{\text{A wins in 'i' throws}} = p_{13}(i) = (X^i)_{13} 
-    \end{align}
 \end{definition}
 \begin{definition}
-Canonical form of $X^2$ is:
+Canonical form of X is:
 \[\mleft(
     \begin{array}{c c| c}
         q & 0 & p\\
@@ -246,13 +242,13 @@ Every transition matrix in it's canonical form can be partitioned as $\mleft(
     i.e we need to consider only $Q^{2n}$ $(n \ge 0, n \in \mathbb{Z}) $\\
 \end{itemize}
 \begin{align}
-\intertext{The modified fundamental matrix is:}
+%\intertext{The modified fundamental matrix is:}
     N = I + Q^2 + Q^4 + ...\\
     = (I - Q^2)^{-1} = \myvec{1 - q^2 & 0\\ 0 & 1 - q^2}^{-1} \\ 
     =\myvec{\dfrac{1}{1 - q^2} & 0\\ 0 & \dfrac{1}{1 - q^2}}
 \end{align}
 \begin{remark}
-    \item The matrix D = NR gives the probability of ending up in the absorbing state (state 3) when the chain starts from a non-absorbent state (states 1 and 2).
+    \item The matrix D = NR (fundamental matrix) gives the probability of ending up in the absorbing state (state 3) when the chain starts from a non-absorbent state (states 1 and 2).
 \end{remark}
 \begin{align}
     D = \myvec{\dfrac{1}{1 - q^2} & 0\\ 0 & \dfrac{1}{1 - q^2}} \myvec{p\\p} = \myvec{\dfrac{p}{1 - q^2}\\ \dfrac{p}{1 - q^2}}
