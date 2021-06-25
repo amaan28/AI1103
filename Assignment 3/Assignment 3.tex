@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{blkarray}
 \usepackage{mathrsfs}
+\usepackage{mleftright}
 \usepackage{txfonts}
 \usepackage{stfloats}
 \usepackage{bm}
@@ -24,6 +25,8 @@
 \usepackage{enumitem}
 \usepackage{mathtools}
 \usepackage{steinmetz}
+\usepackage[english]{babel}
+\usepackage[document]{ragged2e}
 
 \usepackage{circuitikz}
 \usepackage{verbatim}
@@ -97,7 +100,6 @@
 \providecommand{\dec}[2]{\ensuremath{\overset{#1}{\underset{#2}{\gtrless}}}}
 \newcommand{\myvec}[1]{\ensuremath{\begin{pmatrix}#1\end{pmatrix}}}
 \newcommand{\mydet}[1]{\ensuremath{\begin{vmatrix}#1\end{vmatrix}}}
-\numberwithin{equation}{subsection}
 \makeatletter
 \@addtoreset{figure}{problem}
 \makeatother
@@ -146,24 +148,25 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\
     The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
 \end{itemize}
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}[roundnode/.style={circle, draw=black!90, fill=black!7, very thick, minimum size=1.2cm}]
+\begin{figure}[h]
+\begin{center}
+    \begin{tikzpicture}[roundnode/.style={circle, draw=black!90, fill=black!7, very thick, minimum size=1cm}]
         \node [roundnode] at (0, 0)     (a)     {1};
-        \node [roundnode] at (5, 0)     (b)     {2};
-        \node [roundnode] at (2.5, -4.3301) (w) {3};
+        \node [roundnode] at (4, 0)     (b)     {2};
+        \node [roundnode] at (2, -3.4641) (w) {3};
         \draw[every loop, auto=right, line width=1mm,
                 >=latex, draw=orange,fill=orange]
-            (a) edge[bend right=20] node {$q = \dfrac{5}{6}$} (b)
-            (b) edge[bend right=20] node {$q = \dfrac{5}{6}$} (a)
-            (a) edge[bend right=20] node {$p = \dfrac{1}{6}$} (w)
-            (b) edge[bend left=20, auto=left] node {$p =     \dfrac{1}{6}$} (w);
+            (a) edge[bend right=20] node {$q = \frac{5}{6}$} (b)
+            (b) edge[bend right=20] node {$q = \frac{5}{6}$} (a)
+            (a) edge[bend right=20] node {$p = \frac{1}{6}$} (w)
+            (b) edge[bend left=20, auto=left] node {$p =     \frac{1}{6}$} (w);
     \end{tikzpicture}
         \caption{Markov chain for the given problem}
-        \label{fig:my_label}
+        \label{fig: Fig1}
+\end{center}
 \end{figure}
-    
-\begin{center}
+\begin{table}[h]
+    \begin{center}
     \begin{tabular}{|c|c|}
         \hline
         State & Corresponding description \\
@@ -178,17 +181,20 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
         \hline
         \multicolumn{2}{c}{Table 1: State description table}
     \end{tabular}
-\end{center}
+    \end{center}
+\end{table}
+
 \begin{definition}
+    $\implies$The chain is non-\emph{ergodic} and irregular.\\ State 3 is an ABSORBING state.\\
     Transition/Stochastic matrix corresponding to single throw of dice: X\\
     \centering
-         \text{\small (From)} \begin{blockarray}{ *{4}{c} }
+         \text{\small (From)} \begin{blockarray}{ cccc }
                 \multicolumn{3}{c}{(\small To)}\\
                 & 1 & 2 & 3 \\
                 \begin{block}{ c @{\quad} [ @{\,} *{3}{c} @{\,} ] }
                     1 & 0 & q & p\\ 
                     2 & q & 0 & p\\
-                    3 & 0 & 0 & 0\\
+                    3 & 0 & 0 & 1\\
                 \end{block}
            \end{blockarray} = X\\
            $X^n$ corresponds to n throws of dice
@@ -196,58 +202,67 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
             \pr{\text{A wins in 'i' throws}} = p_{13}(i) = (X^i)_{13} 
     \end{align}
 \end{definition}
-\begin{lemma} \large
+\begin{definition}
+Canonical form of $X^2$ is:
+\[\mleft(
+    \begin{array}{c c| c}
+        q & 0 & p\\
+        0 & q & p\\
+        \hline
+        0 & 0 & 1\\
+    \end{array}
+    \mright)\]
+Every transition matrix in it's canonical form can be partitioned as $\mleft(
+    \begin{array}{c|c}
+        Q & R\\
+        \hline
+        O & J\\
+    \end{array}
+    \mright)$\\
+    where Q and R arise from transition probabilities between non-absorbing states\\
+    O = Null matrix,
+    J = Identity matrix\\
+    $X^k$ approaches $\overline{X}$ as k increases.
+    $\overline{X}$ is the limiting matrix\\
     \begin{align}
-        \lim_{n \to \infty}p_{13}(n) = 0
+        Q = \myvec{q & 0\\0 & q},
+        R = \myvec{p\\p},
+        O = \myvec{0 & 0},
+        J = [1]\\
+        \overline{X} = \myvec{O & NR\\O & J}
     \end{align}
-\end{lemma}
-\begin{proof}
-   \begin{align}
-        p , q < 1
-        \implies \text{X is reducible.}\\
-        \implies \lim_{n \to \infty} (X)^n \to 0\label{Eqn:2.1}\\
-        \lim_{n \to \infty}{(X)^n}_{13} = 0
-        \therefore \lim_{n \to \infty} p_{13}(n) = 0
-    \end{align}
-\end{proof}
+\end{definition}
+\begin{itemize}
+    \item  Given constraint: A wins\\
+    \item From the above Markov chain $^{[\ref{fig: Fig1]}}$:\\
+    \begin{itemize}
+        \item We can go To state 3 From state 1 only in ODD no.of steps.
+        \item We can come back to our initial state only in EVEN no.of steps.
+        \item A wins in ${2n+1}^{th}$ step $\implies$ Both A and B should not get 6 in any of the previous 2n throws.
+    \end{itemize}
+    \item From Def 2.2: Matrix Q corresponds to the transtition between non-absorbing states in 1 step.\\
+    $\implies$ We need to come back to state 1 each time we go to state 2.\\
+    $\implies$ We need to increment by two steps.\\
+    i.e we need to consider only $Q^{2n}$ $(n \ge 0, n \in \mathbb{Z}) $\\
+\end{itemize}
 \begin{align}
-    \intertext{Given: A throws first.}
-    \implies p_{13}(1) = X_{13} = p 
-    \intertext{After second throw (by B):}
-    X^2 = \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0} \myvec{0 & q & p\\ q & 0 & p\\ 0 & 0 & 0}\\
-    = \myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}
-    \implies  p_{13}(2) = 0\\
-    X^3 = \myvec{ 0 & q & p\\0 & 0 & 0\\0 & 0 & 0}\myvec{ 0 & 0 & 0\\0 & q^2 & qp\\0 & 0 & 0}\\
-    =\myvec{ 0 & q^3 & q^2p\\0 & 0 & 0\\0 & 0 & 0}
-    \implies  p_{13}(3) = q^2 p
+\intertext{The modified fundamental matrix is:}
+    N = I + Q^2 + Q^4 + ...\\
+    = (I - Q^2)^{-1} = \myvec{1 - q^2 & 0\\ 0 & 1 - q^2}^{-1} \\ 
+    =\myvec{\dfrac{1}{1 - q^2} & 0\\ 0 & \dfrac{1}{1 - q^2}}
 \end{align}
-\centering \begin{tabular}{|c|c|}
-    \hline\
-    $p_{13}(i)$ & Probability \\
-    \hline
-    $p_{13}(1)$ & $p$ = 1/6\\
-    \hline
-    $p_{13}(2)$ & 0\\
-    \hline
-    $p_{13}(3)$ & $q^2p$\\
-    \hline
-    \vdots & \vdots\\
-    $p_{13}(2n)$ & 0\\
-    \hline
-    $p_{13}(2n + 1)$ & $q^{2n}p$\\
-    \hline
-    \multicolumn{2}{c}{Table 2: Summary of Probabilities}\\
-\end{tabular}
-\onehalfspacing
+\begin{remark}
+    \item The matrix D = NR gives the probability of ending up in the absorbing state (state 3) when the chain starts from a non-absorbent state (states 1 and 2).
+\end{remark}
 \begin{align}
-    \pr{\text{A wins}} = \sum_{n=1}^{\infty} p_{13}(n)\\
-    = p + 0 + q^2p + 0 + q^4p + ....\\
-    = \sum_{k=1}^{\infty} (q^2)^k p
-    = p \sum_{k=1}^{\infty} (q^2)^k \hspace{0.5cm} \text{But $|q| <$ 1}\\
-    = p \left(\dfrac{1}{1 - q^2}\right)
-    =\dfrac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
+    D = \myvec{\dfrac{1}{1 - q^2} & 0\\ 0 & \dfrac{1}{1 - q^2}} \myvec{p\\p} = \myvec{\dfrac{p}{1 - q^2}\\ \dfrac{p}{1 - q^2}}
 \end{align}
-\centering \Large
-\pr{\text{A wins the game}} = $\dfrac{6}{11}$\\
-Option D is correct
+Given A starts the game.\\
+$\implies$ Markov chain starts with A (from State 1)
+\large
+\begin{align}
+    \therefore \pr{\text{A wins}} = \dfrac{p}{1 - q^2}= \frac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
+\end{align}\\[7pt]
+        \centering
+OPTION D is correct
 \end{document}
