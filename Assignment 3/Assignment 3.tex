@@ -18,7 +18,8 @@
 \usepackage{subfig}
 \usepackage{mathtools}  
 \usepackage{xfrac} 
-
+\usepackage{float}
+\usepackage{flafter}
 \usepackage{longtable}
 \usepackage{multirow}
 
@@ -148,7 +149,11 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
     The probability of getting 6 = $\dfrac{1}{6}$ = p (say)\\
     The probability of NOT getting 6 = $\dfrac{5}{6}$ = q (say)
 \end{itemize}
-\begin{figure}[h]
+Constraint: A starts the game and A should win.\\
+$\implies$ Until A wins, both A and B cannot win.\\
+%$\implies$ B(State 2) is absorbing state and it represents the state A loses and B wins.\\
+\begin{figure}[!htb]
+Corresponding Markov chain is:\\
 \begin{center}
     \begin{tikzpicture}[roundnode/.style={circle, draw=black!90, fill=black!7, very thick, minimum size=1cm}]
         \node [roundnode] at (0, 0)     (a)     {1};
@@ -156,109 +161,85 @@ Two players A, and B alternately keep rolling a fair dice. The person to get a s
         \node [roundnode] at (2, -3.4641) (w) {3};
         \draw[every loop, auto=right, line width=1mm,
                 >=latex, draw=orange,fill=orange]
-            (a) edge[bend right=20] node {$q = \frac{5}{6}$} (b)
-            (b) edge[bend right=20] node {$q = \frac{5}{6}$} (a)
-            (a) edge[bend right=20] node {$p = \frac{1}{6}$} (w)
-            (b) edge[bend left=20, auto=left] node {$p =     \frac{1}{6}$} (w);
+            (a) edge[bend left=20] node {$qp$} (b)
+            (a) edge[loop above=40] node {$q^2$} (a)
+            (a) edge[bend right=20] node {$p$} (w);
     \end{tikzpicture}
-        \caption{Markov chain for the given problem}
-        \label{fig: Fig1}
+%        \caption{Modified Markov chain}
+        \label{fig:Fig1}
 \end{center}
 \end{figure}
-\begin{table}[h]
+\begin{table}[!htb]
     \begin{center}
     \begin{tabular}{|c|c|}
         \hline
         State & Corresponding description \\
         \hline
-        \multirow{ 2}{*}{1} & Player who plays first.\\
-        & Here: PLAYER A\\
+        1 & A and B both lose.\\
         \hline
-        \multirow{ 2}{*}{2} & Player who plays second.\\
-        & Here: PLAYER B\\
+        2 & A loses and B wins.\\
         \hline
         3 & WINNER\\
         \hline
-        \multicolumn{2}{c}{Table 1: State description table}
+      \multicolumn{2}{c}{Table 1: State description table}
     \end{tabular}
     \end{center}
 \end{table}
-
 \begin{definition}
-    $\implies$The chain is non-\emph{ergodic} and irregular.\\ State 3 is an ABSORBING state.\\
-    Transition/Stochastic matrix corresponding to single throw of dice: X\\
+    \vspace{2cm}
+    2 and 3 are ABSORBING states.\\
+    Transition/Stochastic matrix is: T\\
     \centering
          \text{\small (From)} \begin{blockarray}{ cccc }
                 \multicolumn{3}{c}{(\small To)}\\
                 & 1 & 2 & 3 \\
                 \begin{block}{ c @{\quad} [ @{\,} *{3}{c} @{\,} ] }
-                    1 & 0 & q & p\\ 
-                    2 & q & 0 & p\\
+                    1 & $q^2$ & qp & p\\ 
+                    2 & 0 & 1 & 0\\
                     3 & 0 & 0 & 1\\
                 \end{block}
-           \end{blockarray} = X\\
+           \end{blockarray} = T
 \end{definition}
-\begin{definition}
-Canonical form of X is:
-\[\mleft(
-    \begin{array}{c c| c}
-        q & 0 & p\\
-        0 & q & p\\
-        \hline
-        0 & 0 & 1\\
-    \end{array}
-    \mright)\]
-Every transition matrix in it's canonical form can be partitioned as $\mleft(
+\begin{theorem}
+Every transition matrix can be partitioned as $\mleft(
     \begin{array}{c|c}
         Q & R\\
         \hline
         O & J\\
     \end{array}
     \mright)$\\
-    where Q and R arise from transition probabilities between non-absorbing states\\
+    where Q arise from transition probabilities between non-absorbing states\\
+    R arises from Transition probability from non-absorbing state to absorbing state.\\
     O = Null matrix,
     J = Identity matrix\\
-    $X^k$ approaches $\overline{X}$ as k increases.
-    $\overline{X}$ is the limiting matrix\\
+    $T^k$ approaches $\overline{T}$ as k increases.
+    $\overline{T}$ is the limiting matrix and
+    $\overline{T} = \myvec{O & NR\\O & J}$\\
+    where N is the fundamental matrix.
+    $N = (I - Q)^{-1}$\\
+    \end{theorem}
+\begin{theorem}
+    \item The matrix D = NR gives the probability of ending up in the absorbing states (2 and 3) when the chain starts from a non-absorbent state 1.
+\end{theorem}
+    \[T = \mleft(
+    \begin{array}{c| c c}
+        q^2 & qp & p\\
+        \hline
+        0 & 1 & 0\\
+        0 & 0 & 1\\
+    \end{array}
+    \mright)\]
     \begin{align}
-        Q = \myvec{q & 0\\0 & q},
-        R = \myvec{p\\p},
-        O = \myvec{0 & 0},
-        J = [1]\\
-        \overline{X} = \myvec{O & NR\\O & J}
+        Q = \myvec{q^2},
+        P = \myvec{qp & p},
+        O = \myvec{0 \\ 0},
+        J = \myvec{1 & 0\\0 & 1} \label{eq:eqn1}
     \end{align}
-\end{definition}
-\begin{itemize}
-    \item  Given constraint: A wins\\
-    \item From the above Markov chain $^{[\ref{fig: Fig1]}}$:\\
-    \begin{itemize}
-        \item We can go To state 3 From state 1 only in ODD no.of steps.
-        \item We can come back to our initial state only in EVEN no.of steps.
-        \item A wins in ${2n+1}^{th}$ step $\implies$ Both A and B should not get 6 in any of the previous 2n throws.
-    \end{itemize}
-    \item From Def 2.2: Matrix Q corresponds to the transtition between non-absorbing states in 1 step.\\
-    $\implies$ We need to come back to state 1 each time we go to state 2.\\
-    $\implies$ We need to increment by two steps.\\
-    i.e we need to consider only $Q^{2n}$ $(n \ge 0, n \in \mathbb{Z}) $\\
-\end{itemize}
-\begin{align}
-%\intertext{The modified fundamental matrix is:}
-    N = I + Q^2 + Q^4 + ...\\
-    = (I - Q^2)^{-1} = \myvec{1 - q^2 & 0\\ 0 & 1 - q^2}^{-1} \\ 
-    =\myvec{\dfrac{1}{1 - q^2} & 0\\ 0 & \dfrac{1}{1 - q^2}}
-\end{align}
-\begin{remark}
-    \item The matrix D = NR (fundamental matrix) gives the probability of ending up in the absorbing state (state 3) when the chain starts from a non-absorbent state (states 1 and 2).
-\end{remark}
-\begin{align}
-    D = \myvec{\dfrac{1}{1 - q^2} & 0\\ 0 & \dfrac{1}{1 - q^2}} \myvec{p\\p} = \myvec{\dfrac{p}{1 - q^2}\\ \dfrac{p}{1 - q^2}}
-\end{align}
-Given A starts the game.\\
-$\implies$ Markov chain starts with A (from State 1)
-\large
-\begin{align}
-    \therefore \pr{\text{A wins}} = \dfrac{p}{1 - q^2}= \frac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
-\end{align}\\[7pt]
+
+    \begin{align}
+        N = \myvec{1 - q^2}^{-1} = \myvec{\dfrac{1}{1-q^2}}\\
+        D = NP = \myvec{\dfrac{qp}{1 - q^2} & \dfrac{p}{1 - q^2}}
+    \end{align}
         \centering
 OPTION D is correct
 \end{document}
