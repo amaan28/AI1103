@@ -203,7 +203,7 @@ Corresponding Markov chain is:\\
 \begin{theorem}
 Every transition matrix can be partitioned as $\mleft(
     \begin{array}{c|c}
-        Q & R\\
+        Q & P\\
         \hline
         O & J\\
     \end{array}
@@ -214,13 +214,13 @@ Every transition matrix can be partitioned as $\mleft(
     J = Identity matrix\\
     $T^k$ approaches $\overline{T}$ as k increases.
     $\overline{T}$ is the limiting matrix and
-    $\overline{T} = \myvec{O & NR\\O & J}$\\
+    $\overline{T} = \myvec{O & NP\\O & J}$\\
     where N is the fundamental matrix.
     $N = (I - Q)^{-1}$\\
     \end{theorem}
-\begin{theorem}
-    \item The matrix D = NR gives the probability of ending up in the absorbing states (2 and 3) when the chain starts from a non-absorbent state 1.
-\end{theorem}
+\begin{definition}
+    The matrix D = NP gives the probability of ending up in the absorbing states (2 and 3) when the chain starts from a non-absorbent state 1.
+\end{definition}
     \[T = \mleft(
     \begin{array}{c| c c}
         q^2 & qp & p\\
@@ -238,8 +238,12 @@ Every transition matrix can be partitioned as $\mleft(
 
     \begin{align}
         N = \myvec{1 - q^2}^{-1} = \myvec{\dfrac{1}{1-q^2}}\\
-        D = NP = \myvec{\dfrac{qp}{1 - q^2} & \dfrac{p}{1 - q^2}}
+        D = NP = \myvec{\dfrac{qp}{1 - q^2} & \dfrac{p}{1 - q^2}}\\
+        \pr{\text{A wins}} = D_2 = \dfrac{p}{1 - q^2} = \frac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
     \end{align}
         \centering
+\[
+    \pr{\text{A wins}} = \dfrac{6}{11}
+\]
 OPTION D is correct
 \end{document}
