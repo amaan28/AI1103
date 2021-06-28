@@ -221,15 +221,15 @@ Every transition matrix can be partitioned as $\mleft(
 \begin{definition}
     The matrix D = NP gives the probability of ending up in the absorbing states (2 and 3) when the chain starts from a non-absorbent state 1.
 \end{definition}
-    \[T = \mleft(
+\begin{align}
+    T = \mleft(
     \begin{array}{c| c c}
         q^2 & qp & p\\
         \hline
         0 & 1 & 0\\
         0 & 0 & 1\\
     \end{array}
-    \mright)\]
-    \begin{align}
+    \mright)   \\ 
         Q = \myvec{q^2},
         P = \myvec{qp & p},
         O = \myvec{0 \\ 0},
