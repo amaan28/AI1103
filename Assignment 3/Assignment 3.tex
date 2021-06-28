@@ -10,6 +10,7 @@
 \usepackage{blkarray}
 \usepackage{mathrsfs}
 \usepackage{mleftright}
+\usepackage{relsize}
 \usepackage{txfonts}
 \usepackage{stfloats}
 \usepackage{bm}
@@ -179,14 +180,17 @@ Corresponding Markov chain is:\\
         \hline
         2 & A loses and B wins.\\
         \hline
-        3 & WINNER\\
+        3 & A wins\\
         \hline
       \multicolumn{2}{c}{Table 1: State description table}
     \end{tabular}
     \end{center}
 \end{table}
+    \begin{definition}
+    Let $X_n$ be a random variable corresponding to the state of the game after $n^{th}$ throw of dice. $X_0$ is the initial state.\\
+    \end{definition}
 \begin{definition}
-    \vspace{2cm}
+%\vspace{2cm}
     2 and 3 are ABSORBING states.\\
     Transition/Stochastic matrix is: T\\
     \centering
@@ -208,19 +212,24 @@ Every transition matrix can be partitioned as $\mleft(
         O & J\\
     \end{array}
     \mright)$\\
-    where Q arise from transition probabilities between non-absorbing states\\
-    R arises from Transition probability from non-absorbing state to absorbing state.\\
-    O = Null matrix,
-    J = Identity matrix\\
     $T^k$ approaches $\overline{T}$ as k increases.
     $\overline{T}$ is the limiting matrix and
     $\overline{T} = \myvec{O & NP\\O & J}$\\
-    where N is the fundamental matrix.
-    $N = (I - Q)^{-1}$\\
-    \end{theorem}
-\begin{definition}
-    The matrix D = NP gives the probability of ending up in the absorbing states (2 and 3) when the chain starts from a non-absorbent state 1.
-\end{definition}
+        \end{theorem}
+    \begin{tabular}{|c|l|}
+    \hline
+        Partition & Description\\
+        \hline
+        \multirow{2}{*}{Q} & Transition probability between\\&  non-absorbing states \\\hline
+        \multirow{2}{*}{P} & Transition probabilities from non-\\
+        & -absorbing state to absorbing states.\\\hline
+        O & Null matrix\\
+        \hline
+        J & Identity matrix\\
+        \hline
+        N & Fundamental matrix\\
+        \hline
+    \end{tabular}
 \begin{align}
     T = \mleft(
     \begin{array}{c| c c}
@@ -229,15 +238,27 @@ Every transition matrix can be partitioned as $\mleft(
         0 & 1 & 0\\
         0 & 0 & 1\\
     \end{array}
-    \mright)   \\ 
-        Q = \myvec{q^2},
-        P = \myvec{qp & p},
-        O = \myvec{0 \\ 0},
-        J = \myvec{1 & 0\\0 & 1} \label{eq:eqn1}
+    \mright)
     \end{align}
-
+    \begin{table}[!htb]
+    \caption{Matrices and corresponding values}
+     \begin{tabular}{|c|c|c|}
+        \hline
+        Matrix & Description & Value\\\hline
+        Q & \pr{X_{n+1} = 1|X_n = 1} & \myvec{q^2}  \\\hline
+        P & \pr{X_{n+1} \neq 1|X_n = 1} & \myvec{qp & p}\\\hline
+        N & $\mathlarger{\sum}_{n=0}^{\infty} Q^n = (I-Q)^{-1}$ & N = \myvec{\dfrac{1}{1-q^2}}\\\hline
+    \end{tabular}
+    \end{table}
+    \begin{theorem}
+    The matrix D = NP gives the probability of ending up in the absorbing states (2 and 3) when the chain starts from a non-absorbent state 1.\\
+    By definition:
+    \begin{equation*}
+     D = \myvec{\mathlarger{\sum}_{n=1}^{\infty} \pr{\dfrac{X_n = 2}{X_0 = 1}} & \mathlarger{\sum}_{n=1}^{\infty} \pr{\dfrac{X_n = 3}{ X_0 = 1}}}
+    \end{equation*}
+\end{theorem}
     \begin{align}
-        N = \myvec{1 - q^2}^{-1} = \myvec{\dfrac{1}{1-q^2}}\\
+        %D = \myvec{\pr{\dfrac{X_{n \to \infty} = 2}{X_0 = 1}} & \pr{\dfrac{X_{n \to \infty} = 3}{ X_0 = 1}}}\\
         D = NP = \myvec{\dfrac{qp}{1 - q^2} & \dfrac{p}{1 - q^2}}\\
         \pr{\text{A wins}} = D_2 = \dfrac{p}{1 - q^2} = \frac{\frac{1}{6}}{1 - \frac{25}{36}} = \dfrac{6}{11}
     \end{align}
